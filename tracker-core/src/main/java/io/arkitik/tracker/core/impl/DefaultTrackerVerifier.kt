@@ -24,7 +24,7 @@ class DefaultTrackerVerifier(
                 it.methods.contains(HttpMethod.resolve(method))
             }.any {
                 with(pathMatcher) {
-                    match(it.path, servletPath) && it.methods == it.methods
+                    matchStart(servletPath, it.path)
                 }
             }
     }
