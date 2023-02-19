@@ -7,7 +7,7 @@
     <groupId>io.arkitik.tracker</groupId>
     <artifactId>tracker</artifactId>
     <packaging>pom</packaging>
-    <version>v1.0.0</version>
+    <version>v1.1.0</version>
     <modules>
         <module>tracker-core</module>
         <module>tracker-annotation-based</module>
