@@ -7,7 +7,7 @@ import org.springframework.http.HttpMethod
  * Created At **Wednesday **01**, February 2023**
  */
 
-interface TrackedPath {
-    val path: String
-    val methods: Set<HttpMethod>
-}
+data class TrackedPath(
+    val path: String,
+    val methods: Set<HttpMethod>,
+)

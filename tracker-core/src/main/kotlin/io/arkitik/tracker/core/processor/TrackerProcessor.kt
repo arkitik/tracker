@@ -1,7 +1,8 @@
 package io.arkitik.tracker.core.processor
 
+import org.springframework.web.util.ContentCachingRequestWrapper
+import org.springframework.web.util.ContentCachingResponseWrapper
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 /**
  * Created By Mohammed Mohiesen
@@ -9,15 +10,15 @@ import javax.servlet.http.HttpServletResponse
  */
 fun interface TrackerProcessor {
     fun execute(
-        request: HttpServletRequest,
-        response: HttpServletResponse,
+        request: ContentCachingRequestWrapper,
+        response: ContentCachingResponseWrapper,
     )
 
     interface TrackerProcessorUnit {
         fun isSupported(request: HttpServletRequest): Boolean
         fun execute(
-            request: HttpServletRequest,
-            response: HttpServletResponse,
+            request: ContentCachingRequestWrapper,
+            response: ContentCachingResponseWrapper,
         )
     }
 }

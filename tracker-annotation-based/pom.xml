@@ -13,8 +13,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>tracker-core</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 </project>

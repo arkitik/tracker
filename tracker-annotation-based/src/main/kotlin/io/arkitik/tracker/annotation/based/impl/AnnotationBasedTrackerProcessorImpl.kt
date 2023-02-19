@@ -2,8 +2,8 @@ package io.arkitik.tracker.annotation.based.impl
 
 import io.arkitik.tracker.annotation.based.processor.AnnotationBasedTrackerProcessor
 import org.slf4j.LoggerFactory
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
+import org.springframework.web.util.ContentCachingRequestWrapper
+import org.springframework.web.util.ContentCachingResponseWrapper
 
 /**
  * Created By Mohammed Mohiesen
@@ -13,7 +13,7 @@ internal class AnnotationBasedTrackerProcessorImpl(
     private val trackerProcessorUnits: List<AnnotationBasedTrackerProcessor.TrackerProcessorUnit>,
 ) : AnnotationBasedTrackerProcessor {
     private val logger = LoggerFactory.getLogger(javaClass)
-    override fun execute(request: HttpServletRequest, response: HttpServletResponse) {
+    override fun execute(request: ContentCachingRequestWrapper, response: ContentCachingResponseWrapper) {
         trackerProcessorUnits.filter { processor ->
             processor.isSupported(request)
         }.forEach {

@@ -1,10 +1,10 @@
 package io.arkitik.tracker.configuration.based
 
 import io.arkitik.tracker.configuration.based.config.TrackerConfig
-import io.arkitik.tracker.configuration.based.filter.TrackerConfigurationBasedRequestFilter
 import io.arkitik.tracker.configuration.based.impl.ConfigurationBasedTrackerProcessorImpl
 import io.arkitik.tracker.configuration.based.processor.ConfigurationBasedTrackerProcessor
 import io.arkitik.tracker.configuration.based.units.ConfigurationBasedTrackerProcessorUnit
+import io.arkitik.tracker.core.processor.TrackerProcessor
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
@@ -35,15 +35,10 @@ class TrackerConfigurationBasedConfiguration {
         pathMatcher: PathMatcher,
         configurationBasedTrackerProcessor: ConfigurationBasedTrackerProcessor,
         trackerConfig: TrackerConfig,
-    ): ConfigurationBasedTrackerProcessor.TrackerProcessorUnit =
+    ): TrackerProcessor.TrackerProcessorUnit =
         ConfigurationBasedTrackerProcessorUnit(
-            pathMatcher,
-            configurationBasedTrackerProcessor,
-            trackerConfig
+            pathMatcher = pathMatcher,
+            trackerConfig = trackerConfig,
+            configurationBasedTrackerProcessor = configurationBasedTrackerProcessor
         )
-
-    @Bean
-    fun trackerConfigurationBasedRequestFilter(
-        configurationBasedTrackerProcessor: ConfigurationBasedTrackerProcessor,
-    ) = TrackerConfigurationBasedRequestFilter(configurationBasedTrackerProcessor)
 }

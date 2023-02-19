@@ -1,9 +1,9 @@
 package io.arkitik.tracker.annotation.based
 
-import io.arkitik.tracker.annotation.based.filter.TrackerAnnotationBasedRequestFilter
 import io.arkitik.tracker.annotation.based.impl.AnnotationBasedTrackerProcessorImpl
 import io.arkitik.tracker.annotation.based.processor.AnnotationBasedTrackerProcessor
 import io.arkitik.tracker.annotation.based.units.AnnotationBasedTrackerProcessorUnit
+import io.arkitik.tracker.core.processor.TrackerProcessor
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.ApplicationContext
 import org.springframework.context.annotation.Bean
@@ -33,15 +33,10 @@ class TrackerAnnotationBasedConfiguration {
         applicationContext: ApplicationContext,
         pathMatcher: PathMatcher,
         annotationBasedTrackerProcessor: AnnotationBasedTrackerProcessor,
-    ): AnnotationBasedTrackerProcessor.TrackerProcessorUnit =
+    ): TrackerProcessor.TrackerProcessorUnit =
         AnnotationBasedTrackerProcessorUnit(
-            applicationContext,
-            pathMatcher,
-            annotationBasedTrackerProcessor
+            applicationContext = applicationContext,
+            pathMatcher = pathMatcher,
+            annotationBasedTrackerProcessor = annotationBasedTrackerProcessor
         )
-
-    @Bean
-    fun trackerAnnotationBasedRequestFilter(
-        annotationBasedTrackerProcessor: AnnotationBasedTrackerProcessor,
-    ): TrackerAnnotationBasedRequestFilter = TrackerAnnotationBasedRequestFilter(annotationBasedTrackerProcessor)
 }

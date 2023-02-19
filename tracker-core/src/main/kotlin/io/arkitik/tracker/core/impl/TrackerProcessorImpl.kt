@@ -2,8 +2,8 @@ package io.arkitik.tracker.core.impl
 
 import io.arkitik.tracker.core.processor.TrackerProcessor
 import org.slf4j.LoggerFactory
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
+import org.springframework.web.util.ContentCachingRequestWrapper
+import org.springframework.web.util.ContentCachingResponseWrapper
 
 /**
  * Created By Mohammed Mohiesen
@@ -13,7 +13,7 @@ internal class TrackerProcessorImpl(
     private val trackerProcessorUnits: List<TrackerProcessor.TrackerProcessorUnit>,
 ) : TrackerProcessor {
     private val logger = LoggerFactory.getLogger(javaClass)
-    override fun execute(request: HttpServletRequest, response: HttpServletResponse) {
+    override fun execute(request: ContentCachingRequestWrapper, response: ContentCachingResponseWrapper) {
         trackerProcessorUnits.filter { processor ->
             processor.isSupported(request)
         }.forEach {

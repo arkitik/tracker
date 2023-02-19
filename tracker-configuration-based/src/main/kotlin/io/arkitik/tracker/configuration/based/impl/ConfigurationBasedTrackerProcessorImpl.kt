@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse
  * Created By Mohammed Mohiesen
  * Created At **Wednesday **01**, February 2023**
  */
-class ConfigurationBasedTrackerProcessorImpl(
+internal class ConfigurationBasedTrackerProcessorImpl(
     private val trackerProcessorUnits: List<ConfigurationBasedTrackerProcessor.TrackerProcessorUnit>,
 ) : ConfigurationBasedTrackerProcessor {
     private val logger = LoggerFactory.getLogger(javaClass)

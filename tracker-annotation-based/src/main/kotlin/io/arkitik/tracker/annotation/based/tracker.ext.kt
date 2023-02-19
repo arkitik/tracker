@@ -1,6 +1,5 @@
 package io.arkitik.tracker.annotation.based
 
-import io.arkitik.tracker.annotation.based.impl.TrackedPathImpl
 import io.arkitik.tracker.annotation.based.model.TrackedPath
 import org.springframework.http.HttpMethod
 
@@ -10,7 +9,7 @@ import org.springframework.http.HttpMethod
  */
 
 infix fun String.toTrackedPath(methods: Iterable<HttpMethod>): TrackedPath =
-    TrackedPathImpl(this, methods.toSet())
+    TrackedPath(this, methods.toSet())
 
 infix fun Collection<String>.toTrackedPaths(methods: Iterable<HttpMethod>) = map {
     it.toTrackedPath(methods)

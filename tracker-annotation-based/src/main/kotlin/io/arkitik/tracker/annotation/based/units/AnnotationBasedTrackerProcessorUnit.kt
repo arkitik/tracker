@@ -5,13 +5,15 @@ import io.arkitik.tracker.annotation.based.annotation.TrackedRestController
 import io.arkitik.tracker.annotation.based.model.TrackedPath
 import io.arkitik.tracker.annotation.based.processor.AnnotationBasedTrackerProcessor
 import io.arkitik.tracker.annotation.based.toTrackedPaths
+import io.arkitik.tracker.core.processor.TrackerProcessor
 import org.springframework.beans.factory.BeanFactoryUtils
 import org.springframework.context.ApplicationContext
 import org.springframework.http.HttpMethod
 import org.springframework.util.PathMatcher
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping
+import org.springframework.web.util.ContentCachingRequestWrapper
+import org.springframework.web.util.ContentCachingResponseWrapper
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 /**
  * Created By Mohammed Mohiesen
@@ -21,7 +23,7 @@ internal class AnnotationBasedTrackerProcessorUnit(
     applicationContext: ApplicationContext,
     private val pathMatcher: PathMatcher,
     private val annotationBasedTrackerProcessor: AnnotationBasedTrackerProcessor,
-) : AnnotationBasedTrackerProcessor.TrackerProcessorUnit {
+) : TrackerProcessor.TrackerProcessorUnit {
     private val trackedPaths: MutableList<TrackedPath> = ArrayList()
 
     init {
@@ -58,7 +60,7 @@ internal class AnnotationBasedTrackerProcessorUnit(
             }
     }
 
-    override fun execute(request: HttpServletRequest, response: HttpServletResponse) {
+    override fun execute(request: ContentCachingRequestWrapper, response: ContentCachingResponseWrapper) {
         annotationBasedTrackerProcessor.execute(request, response)
     }
 }
