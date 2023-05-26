@@ -12,6 +12,7 @@
         <module>tracker-core</module>
         <module>tracker-annotation-based</module>
         <module>tracker-configuration-based</module>
+        <module>tracker-core-reactive</module>
     </modules>
     <name>Tracker</name>
     <description>

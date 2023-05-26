@@ -9,7 +9,7 @@ import org.springframework.web.util.ContentCachingResponseWrapper
  * Created By Mohammed Mohiesen
  * Created At **Wednesday **01**, February 2023**
  */
-internal class TrackerProcessorImpl(
+internal class DefaultTrackerProcessor(
     private val trackerProcessorUnits: List<TrackerProcessor.TrackerProcessorUnit>,
 ) : TrackerProcessor {
     private val logger = LoggerFactory.getLogger(javaClass)

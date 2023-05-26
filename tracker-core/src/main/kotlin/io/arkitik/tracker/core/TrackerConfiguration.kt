@@ -1,8 +1,9 @@
 package io.arkitik.tracker.core
 
 import io.arkitik.tracker.core.filter.TrackerRequestFilter
-import io.arkitik.tracker.core.impl.TrackerProcessorImpl
+import io.arkitik.tracker.core.impl.DefaultTrackerProcessor
 import io.arkitik.tracker.core.processor.TrackerProcessor
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.filter.OncePerRequestFilter
@@ -20,7 +21,8 @@ class TrackerConfiguration {
     ): OncePerRequestFilter = TrackerRequestFilter(trackProcessor)
 
     @Bean
-    fun trackerProcessor(
+    @ConditionalOnMissingBean
+    fun defaultTrackerProcessor(
         trackerProcessorUnits: List<TrackerProcessor.TrackerProcessorUnit>,
-    ): TrackerProcessor = TrackerProcessorImpl(trackerProcessorUnits)
+    ): TrackerProcessor = DefaultTrackerProcessor(trackerProcessorUnits)
 }
