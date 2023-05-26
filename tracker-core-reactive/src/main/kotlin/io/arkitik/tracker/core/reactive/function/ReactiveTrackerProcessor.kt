@@ -7,13 +7,16 @@ import org.springframework.web.util.ContentCachingResponseWrapper
 import reactor.kotlin.core.publisher.toFlux
 
 /**
- * Created By Mohammed Mohiesen
- * Created At **Wednesday **01**, February 2023**
+ * Created By Ibrahim Al-Tamimi
+ * Created At **Friday **26**, May 2023**
  */
 internal class ReactiveTrackerProcessor(
     private val trackerProcessorUnits: List<TrackerProcessor.TrackerProcessorUnit>,
 ) : TrackerProcessor {
-    private val logger = LoggerFactory.getLogger(javaClass)
+    companion object {
+        private val logger = LoggerFactory.getLogger(ReactiveTrackerProcessor::class.java)
+    }
+
     override fun execute(request: ContentCachingRequestWrapper, response: ContentCachingResponseWrapper) {
         trackerProcessorUnits.toFlux()
             .filter { processor ->
@@ -24,8 +27,8 @@ internal class ReactiveTrackerProcessor(
                 }.onFailure { error ->
                     logger.warn(
                         "Filter wasn't applied properly, error will be ignored, cause [Processor: {}, Cause: {}]",
-                        error,
-                        error.message
+                        processor.javaClass.simpleName,
+                        error.message,
                     )
                 }
             }

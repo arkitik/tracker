@@ -12,17 +12,20 @@ import org.springframework.web.util.ContentCachingResponseWrapper
 internal class DefaultTrackerProcessor(
     private val trackerProcessorUnits: List<TrackerProcessor.TrackerProcessorUnit>,
 ) : TrackerProcessor {
-    private val logger = LoggerFactory.getLogger(javaClass)
+    companion object {
+        private val logger = LoggerFactory.getLogger(DefaultTrackerProcessor::class.java)
+    }
+
     override fun execute(request: ContentCachingRequestWrapper, response: ContentCachingResponseWrapper) {
         trackerProcessorUnits.filter { processor ->
             processor.isSupported(request)
-        }.forEach {
-            it.runCatching {
+        }.forEach { processor ->
+            processor.runCatching {
                 execute(request, response)
             }.onFailure { error ->
                 logger.warn(
                     "Filter wasn't applied properly, error will be ignored, cause [Processor: {}, Cause: {}]",
-                    error,
+                    processor.javaClass.canonicalName,
                     error.message
                 )
             }
